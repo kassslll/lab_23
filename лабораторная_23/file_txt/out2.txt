@@ -1,0 +1,81 @@
+#DEFINE _CRT_SECURE_NO_WARNINGS
+#INCLUDE <STDIO.H>
+#INCLUDE <WINDOWS.H>
+#INCLUDE <STRING.H>
+
+#DEFINE MAX_LEN 80
+CHAR S[MAX_LEN];
+
+VOID TASK_1();
+VOID TASK_2();
+
+VOID MAIN() {
+	SETCONSOLECP(1251);
+	SETCONSOLEOUTPUTCP(1251);
+	TASK_2();
+}
+
+VOID TASK_1() {
+	PRINTF("Фатхутдинов Абдулрауф Илгизарович Пибд-13\N");
+	PRINTF("ЛР23 задача 1\N");
+
+	FILE* FIN = FOPEN("D:\\Учёба\\1 курс\\Основы алгоримизации и программирование (Власенко)\\лабораторная_23\\FILE_TXT\\TEXT1.TXT", "RT");
+	IF (FIN == NULL) {
+		PRINTF("FILE NOT FOUND\N");
+		RETURN;
+	}
+
+	FILE* FOUT = FOPEN("D:\\Учёба\\1 курс\\Основы алгоримизации и программирование (Власенко)\\лабораторная_23\\FILE_TXT\\OUT1.TXT", "WT");
+	IF (FOUT == NULL) {
+		PRINTF("FILE NOT CREATE\N");
+		RETURN;
+	}
+
+	WHILE (!FEOF(FIN)) {
+		IF (FGETS(S, MAX_LEN - 1, FIN) != NULL) {
+			FOR (INT I = 0; S[I] != '\0'; I++) {
+				IF (S[I] == '\T') {
+					S[I] = '%';
+				}
+			}
+
+			FPRINTF(FOUT, "%S", S);
+			PRINTF(">>%S<<\N", S);
+		}
+	}
+	FCLOSE(FOUT);
+	FCLOSE(FIN);
+}
+
+VOID TASK_2() {
+	PRINTF("Фатхутдинов Абдулрауф Илгизарович Пибд-13\N");
+	PRINTF("ЛР23 задача 2\N");
+
+	FILE* FIN = FOPEN("D:\\Учёба\\1 курс\\Основы алгоримизации и программирование (Власенко)\\лабораторная_23\\FILE_TXT\\TEXT2.TXT", "RT");
+	IF (FIN == NULL) {
+		PRINTF("FILE NOT FOUND\N");
+		RETURN;
+	}
+
+	FILE* FOUT = FOPEN("D:\\Учёба\\1 курс\\Основы алгоримизации и программирование (Власенко)\\лабораторная_23\\FILE_TXT\\OUT2.TXT", "WT");
+	IF (FOUT == NULL) {
+		PRINTF("FILE NOT CREATE\N");
+		RETURN;
+	}
+
+	WHILE (!FEOF(FIN)) {
+		IF (FGETS(S, MAX_LEN - 1, FIN) != NULL) {
+			
+			FOR (INT I = 0; S[I] != '\0'; I++) {
+				IF (S[I] > 96 && ISALPHA(S[I])) {
+					S[I] -= 32;
+				}
+			}
+			FPRINTF(FOUT, "%S", S);
+			PRINTF(">>%S<<\N", S);
+		}
+	}
+	FCLOSE(FOUT);
+	FCLOSE(FIN);
+}
+
